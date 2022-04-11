@@ -1,0 +1,17 @@
+Purpose:
+- Bumps threads to prevent early closure.
+- Can start threads as well.
+
+Features:
+- Posts message in thread to keep alive. (Message can be deleted or saved depending on user choice)
+- Can schedule/unschedule bumpings to prevent constant use of the !bump command.
+- Use of the !create command to create a new thread.
+- Possible !delete command as well.
+
+To Consider:
+1. Persistence
+   - What if the bot does down and a thread is archived during maintenance? Should those threads be unarchived?
+2. Concurrency Implementation
+   - How do we achieve scheduling of bumping using asyncio?
+3. Possible Hangups
+   - What if a thread isn't active and a scheduled message is sent out? Should the channel be revived?
