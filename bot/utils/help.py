@@ -47,10 +47,20 @@ class HelpView(nextcord.ui.View):
 
     @nextcord.ui.button(label="Previous Page", style=nextcord.ButtonStyle.blurple)
     async def back(self, button: nextcord.ui.Button, interaction: nextcord.Interaction):
-        pass
+        if self._page_number == 1:
+            return
+
+        self._page_number = self._page_number - 1
+        new_embed = nextcord.Embed.from_dict(self.get_embed_object(self._page_number))
+        await interaction.response.edit_message(view=self, embed=new_embed)
 
     @nextcord.ui.button(label="Next Page", style=nextcord.ButtonStyle.blurple)
     async def forward(
         self, button: nextcord.ui.Button, interaction: nextcord.Interaction
     ):
-        pass
+        if self._page_number == len(self.cog_pages):
+            return
+        
+        self._page_number = self._page_number + 1
+        new_embed = nextcord.Embed.from_dict(self.get_embed_object(self._page_number))
+        await interaction.response.edit_message(view=self, embed=new_embed)
