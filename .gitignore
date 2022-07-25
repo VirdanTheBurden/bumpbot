@@ -1,2 +1,5 @@
 .env
-src/exts/__pycache__
+__pycache__
+bot/__pycache__
+bot/exts/__pycache__
+bot/utils/__pycache__
