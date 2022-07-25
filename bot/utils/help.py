@@ -60,7 +60,7 @@ class HelpView(nextcord.ui.View):
     ):
         if self._page_number == len(self.cog_pages):
             return
-        
+
         self._page_number = self._page_number + 1
         new_embed = nextcord.Embed.from_dict(self.get_embed_object(self._page_number))
         await interaction.response.edit_message(view=self, embed=new_embed)

@@ -19,7 +19,7 @@ jobs:
           poetry install
         
       - name: Run isort
-        run: "poetry run isort src"
+        run: "poetry run isort bot"
         
       - name: Run black
-        run: "poetry run black src"
+        run: "poetry run black bot"
