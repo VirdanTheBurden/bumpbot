@@ -25,7 +25,7 @@ async def on_ready():
 async def help(interaction: nextcord.Interaction):
     obj = HelpView(bot)
     e = nextcord.Embed.from_dict(obj.get_embed_object(1))
-    await interaction.send(view=obj, embed=e)
+    await interaction.send(view=obj, embed=e, ephemeral=True)
 
 
 @bot.slash_command(guild_ids=[TESTING_GUILD_ID])
