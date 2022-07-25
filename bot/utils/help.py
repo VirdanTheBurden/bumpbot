@@ -1,5 +1,7 @@
 import nextcord
 from nextcord.ext import commands
+from inspect import Parameter
+from loguru import logger
 
 
 class HelpView(nextcord.ui.View):
@@ -28,8 +30,16 @@ class HelpView(nextcord.ui.View):
 
         for c in cog.walk_commands():
             if c.help != "No use":
+                params = []
+
+                for k, v in c.clean_params.items():
+                    if v.default == Parameter.empty:
+                        params.append(f"<{k}>")
+                    else:
+                        params.append(f"<{k}={v.default}>")
+
                 field_object = {
-                    "name": f"%{c.qualified_name}",
+                    "name": f"{c.qualified_name} {' '.join(params)}",
                     "value": c.help,
                     "inline": False,
                 }
