@@ -24,14 +24,14 @@ class Threads(commands.Cog):
         self,
         ctx: commands.Context,
         name: str,
-        channel: nextcord.channel.TextChannel = None,
+        channel_id: nextcord.channel.TextChannel = None,
         is_public: bool = True,
         duration: int = 1440,
     ):
         """Creates a new (private or public) thread under a provided channel."""
 
-        if channel is None:
-            channel = ctx.channel
+        if channel_id is None:
+            channel_id = ctx.channel
 
         if is_public:
             thread_type = nextcord.ChannelType.public_thread
@@ -44,45 +44,45 @@ class Threads(commands.Cog):
                 )
                 thread_type = nextcord.ChannelType.public_thread
 
-        thread = await channel.create_thread(
+        thread = await channel_id.create_thread(
             name=name, auto_archive_duration=duration, type=thread_type
         )
         logger.info(
-            f"Created thread {name} (id: {thread.id}) under channel {channel.name} (id: {channel.id})"
+            f"Created thread {name} (id: {thread.id}) under channel {channel_id.name} (id: {channel_id.id})"
         )
 
         await thread.add_user(ctx.author)
         logger.info(f"Added user {ctx.author} (id: {ctx.author.id}) to thread {name}")
 
-        await ctx.send(f"Thread {name} has been created under channel {channel.name}")
+        await ctx.send(f"Thread {name} has been created under channel {channel_id.name}")
 
     @thread.command()
-    async def delete(self, ctx: commands.Context, thread: nextcord.Thread):
+    async def delete(self, ctx: commands.Context, thread_id: nextcord.Thread):
         """Deletes an arbitrary discord thread."""
 
-        await thread.delete()
+        await thread_id.delete()
         logger.info(
-            f"Deleted thread {thread.name} under channel {thread.parent.name} (id: {thread.parent.id})"
+            f"Deleted thread {thread_id.name} under channel {thread_id.parent.name} (id: {thread_id.parent.id})"
         )
 
-        await ctx.send(f"Thread {thread.name} deleted!")
+        await ctx.send(f"Thread {thread_id.name} deleted!")
 
     @thread.command()
-    async def archive(self, ctx: commands.Context, thread: nextcord.Thread):
+    async def archive(self, ctx: commands.Context, thread_id: nextcord.Thread):
         """Archives an arbitrary discord thread."""
 
-        await thread.edit(archived=True)
+        await thread_id.edit(archived=True)
         logger.info(
-            f"Archived thread {thread.name} under channel {thread.parent.name} (id: {thread.parent.id})"
+            f"Archived thread {thread_id.name} under channel {thread_id.parent.name} (id: {thread_id.parent.id})"
         )
 
     @thread.command()
-    async def unarchive(self, ctx: commands.Context, thread: nextcord.Thread):
+    async def unarchive(self, ctx: commands.Context, thread_id: nextcord.Thread):
         """Unarchives an arbitrary discord thread."""
 
-        await thread.edit(archived=False)
+        await thread_id.edit(archived=False)
         logger.info(
-            f"Unarchived thread {thread.name} under channel {thread.parent.name} (id: {thread.parent.id})"
+            f"Unarchived thread {thread_id.name} under channel {thread_id.parent.name} (id: {thread_id.parent.id})"
         )
 
     @thread.group(invoke_without_command=True)
