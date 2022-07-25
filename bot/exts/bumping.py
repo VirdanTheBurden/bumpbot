@@ -59,8 +59,12 @@ class Bumping(commands.Cog):
         )
 
         task.start()
-        await ctx.send(f"Thread {thread_id.name} will be bumped every {interval} minutes.")
-        logger.info(f"Started new bump task on thread {thread_id.name} (id: {thread_id.id})")
+        await ctx.send(
+            f"Thread {thread_id.name} will be bumped every {interval} minutes."
+        )
+        logger.info(
+            f"Started new bump task on thread {thread_id.name} (id: {thread_id.id})"
+        )
 
     @bump.command()
     async def unschedule(self, ctx: commands.Context, thread_id: nextcord.Thread):
@@ -94,7 +98,9 @@ class Bumping(commands.Cog):
                 0
             ].next_iteration.astimezone(tz=datetime.timezone.utc)
             next_bump: str = utc_time.strftime(format_str)
-            creation_date = self._scheduled_threads[thread_id.id][1].strftime(format_str)
+            creation_date = self._scheduled_threads[thread_id.id][1].strftime(
+                format_str
+            )
 
             embed.color = nextcord.Color.green()
             embed.add_field(name="Scheduled", value="true", inline=False)

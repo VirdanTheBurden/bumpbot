@@ -13,7 +13,6 @@ bot.add_cog(Threads(bot))
 bot.add_cog(Bumping(bot))
 
 
-
 TESTING_GUILD_ID = 840691233185988628  # Replace with your guild ID
 
 

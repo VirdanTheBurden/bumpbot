@@ -54,7 +54,9 @@ class Threads(commands.Cog):
         await thread.add_user(ctx.author)
         logger.info(f"Added user {ctx.author} (id: {ctx.author.id}) to thread {name}")
 
-        await ctx.send(f"Thread {name} has been created under channel {channel_id.name}")
+        await ctx.send(
+            f"Thread {name} has been created under channel {channel_id.name}"
+        )
 
     @thread.command()
     async def delete(self, ctx: commands.Context, thread_id: nextcord.Thread):

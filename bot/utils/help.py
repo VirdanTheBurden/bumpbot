@@ -1,7 +1,7 @@
+from inspect import Parameter
+
 import nextcord
 from nextcord.ext import commands
-from inspect import Parameter
-from loguru import logger
 
 
 class HelpView(nextcord.ui.View):
