@@ -1,28 +1,8 @@
 from nextcord.ext import tasks, commands
 import nextcord
 from loguru import logger
-import re
 import datetime
-
-
-class Minutes(commands.Converter):
-    async def convert(self, ctx: commands.Context, argument: str) -> float:
-        minutes: float = 0.0
-
-        time_legend = {
-            "s" : 1/60,
-            "m" : 1,
-            "h" : 60,
-            "d" : 1440,
-            "w" : 10080
-        }
-
-        pattern = re.compile("\d+[smhdw]")
-        for match in re.finditer(pattern, argument):
-            s = match[0]
-            minutes += time_legend[s[-1]] * int(s[0:-1])
-
-        return minutes
+from ..utils.converters import Minutes
 
 
 class Bumping(commands.Cog):

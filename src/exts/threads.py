@@ -14,7 +14,10 @@ class Threads(commands.Cog):
     
     @commands.group(invoke_without_command=True)
     async def thread(self, ctx: commands.Context):
+        """No use"""
+
         await ctx.send("This command alone won't do anything. Use /help to figure out what to do!")
+    
     
     @thread.command()
     async def create(self, ctx: commands.Context, name: str, channel: nextcord.channel.TextChannel = None, is_public: bool = True, duration: int = 1440):
@@ -70,4 +73,6 @@ class Threads(commands.Cog):
     
     @thread.group(invoke_without_command=True)
     async def edit(self, ctx: commands.Context):
+        """No use"""
+        
         await ctx.send("This command alone will not do anything. Use /help to find out what to do!")
