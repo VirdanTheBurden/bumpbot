@@ -7,10 +7,6 @@ class Threads(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
-    @commands.Cog.listener()
-    async def on_ready(self):
-        logger.info("Threads cog has been fully loaded!")
-
     @commands.group(invoke_without_command=True)
     async def thread(self, ctx: commands.Context):
         """No use"""
@@ -55,7 +51,7 @@ class Threads(commands.Cog):
         logger.info(f"Added user {ctx.author} (id: {ctx.author.id}) to thread {name}")
 
         await ctx.send(
-            f"Thread {name} has been created under channel {channel_id.name}"
+            f'Thread "{name}" has been created under channel {channel_id.name}.'
         )
 
     @thread.command()
@@ -67,7 +63,7 @@ class Threads(commands.Cog):
             f"Deleted thread {thread_id.name} under channel {thread_id.parent.name} (id: {thread_id.parent.id})"
         )
 
-        await ctx.send(f"Thread {thread_id.name} deleted!")
+        await ctx.send(f'Thread "{thread_id.name}" deleted!')
 
     @thread.command()
     async def archive(self, ctx: commands.Context, thread_id: nextcord.Thread):
@@ -78,6 +74,8 @@ class Threads(commands.Cog):
             f"Archived thread {thread_id.name} under channel {thread_id.parent.name} (id: {thread_id.parent.id})"
         )
 
+        await ctx.send(f'Thread "{thread_id.name}" has been archived.')
+
     @thread.command()
     async def unarchive(self, ctx: commands.Context, thread_id: nextcord.Thread):
         """Unarchives an arbitrary discord thread."""
@@ -86,6 +84,8 @@ class Threads(commands.Cog):
         logger.info(
             f"Unarchived thread {thread_id.name} under channel {thread_id.parent.name} (id: {thread_id.parent.id})"
         )
+
+        await ctx.send(f'Thread "{thread_id.name}" is unarchived.')
 
     @thread.group(invoke_without_command=True)
     async def edit(self, ctx: commands.Context):

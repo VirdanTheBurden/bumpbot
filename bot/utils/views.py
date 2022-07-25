@@ -7,9 +7,10 @@ from nextcord.ext import commands
 class HelpView(nextcord.ui.View):
     """Represents the Help embed."""
 
-    def __init__(self, bot):
+    def __init__(self, bot: commands.Bot, prefix: str):
         super().__init__()
         self._page_number = 1
+        self._prefix = prefix
 
         # build pages
         self.cog_pages: dict[int, tuple[str, dict]] = {
@@ -29,7 +30,7 @@ class HelpView(nextcord.ui.View):
         }
 
         for c in cog.walk_commands():
-            if c.help != "No use":
+            if "No use" not in c.help and not c.name.startswith("_"):
                 params = []
 
                 for k, v in c.clean_params.items():
@@ -39,7 +40,7 @@ class HelpView(nextcord.ui.View):
                         params.append(f"<{k}={v.default}>")
 
                 field_object = {
-                    "name": f"{c.qualified_name} {' '.join(params)}",
+                    "name": f"{self._prefix}{c.qualified_name} {' '.join(params)}",
                     "value": c.help,
                     "inline": False,
                 }
