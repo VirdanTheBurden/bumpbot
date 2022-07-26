@@ -86,11 +86,3 @@ class Threads(commands.Cog):
         )
 
         await ctx.send(f'Thread "{thread_id.name}" is unarchived.')
-
-    @thread.group(invoke_without_command=True)
-    async def edit(self, ctx: commands.Context):
-        """No use"""
-
-        await ctx.send(
-            "This command alone will not do anything. Use /help to find out what to do!"
-        )

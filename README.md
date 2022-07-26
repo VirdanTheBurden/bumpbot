@@ -15,4 +15,5 @@ Discord Bot for thread management and scheduled bumping.
 5. run `poetry install`
 6. run `poetry shell`
 7. edit `config.json` and replace the `"guild_id"` entry with the ID of your guild
-7. run `python3 -m bumpbot`
+8. (optional) Change the `"prefix"` entry to any string you'd like
+9. run `python3 -m bumpbot`

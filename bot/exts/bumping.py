@@ -193,7 +193,7 @@ class Bumping(commands.Cog):
                 )
 
                 embeds.append(embed)
-            
+
             logger.debug(embeds)
             await ctx.send(embeds=embeds)
             return
