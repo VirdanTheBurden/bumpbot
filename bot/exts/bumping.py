@@ -19,10 +19,14 @@ class Bumping(commands.Cog):
             int, tuple[tasks.Loop, datetime.datetime, str, int]
         ] = {}
 
-        with open(Path.cwd() / "thread_schedule.json", "r+") as f:
-            if len(f.readlines()) != 0:
-                f.seek(0)
-                self._deserialize(f)
+        try:
+            with open(Path.cwd() / "thread_schedule.json", "r+") as f:
+                if len(f.readlines()) != 0:
+                    f.seek(0)
+                    self._deserialize(f)
+        except FileNotFoundError:
+            logger.warning("thread_schedule.json does not exist, skipping...")
+            
 
     def _serialize(self):
         """Saves state of scheduled threads."""

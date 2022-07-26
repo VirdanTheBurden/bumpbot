@@ -3,3 +3,4 @@ __pycache__
 bot/__pycache__
 bot/exts/__pycache__
 bot/utils/__pycache__
+thread_schedule.json
