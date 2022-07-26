@@ -44,7 +44,6 @@ class Bumping(commands.Cog):
 
                 to_serialize[id] = data
 
-            logger.debug(to_serialize)
             json.dump(to_serialize, f)
 
     def _deserialize(self, file: TextIO):
@@ -165,7 +164,6 @@ class Bumping(commands.Cog):
                 if thread.id in self._scheduled_threads
             ]
 
-            logger.debug(threads)
 
             for thread in threads:
 
@@ -193,12 +191,10 @@ class Bumping(commands.Cog):
                 )
 
                 embeds.append(embed)
-
-            logger.debug(embeds)
+            
             await ctx.send(embeds=embeds)
             return
 
-        logger.debug(self._scheduled_threads)
 
         embed: nextcord.Embed = nextcord.Embed()
         embed.title = f"Status of thread {thread_id.name}"
